@@ -61,7 +61,6 @@ namespace Class.Tests
         [TestCase("ArrayRectangles")]
         public void Class_Exists(string className)
         {
-            //цей шит просить повторно вказати назву збірки після повної назви класу
             var type = Type.GetType($"Class.{className}" + ", Class");
 
             if (type == null && !type.IsPublic)
@@ -88,7 +87,6 @@ namespace Class.Tests
                 Assert.Fail($"Class '{className}' doesn't have public constructor.");
         }
 
-        //за завданням студ створює конструктор на вибір
         [Test]
         public void ArrayRectangles_HasPublicConstructorThatTakesIEnumerableOrArray()
         {
@@ -135,7 +133,6 @@ namespace Class.Tests
         }
 
 
-        //винесено з атрибуту, бо там не працював GetType
         static object[] addRectangleTestSource =
         {
             new object[]
