@@ -4,33 +4,101 @@ using System.Linq;
 
 namespace Class
 {
-    //TODO: Create public class Rectangle here
+    public class Rectangle
+    {
+        private double sideA, sideB;
+        public Rectangle (double sideA, double sideB)
+        {
+            this.sideA = sideA;
+            this.sideB = sideB;
+        }
+        public Rectangle(double sideA)
+        {
+            this.sideA = sideA;
+            sideB = 5;
+        }
+        public Rectangle()
+        {
+            sideA = 4;
+            sideB = 3;
+        }
 
-    //TODO: Define two private double fields: 'sideA', 'sideB'
+        public double GetSideA()
+        {
+            return sideA;
+        }
+        public double GetSideB()
+        {
+            return sideB;
+        }
+        public double Area()
+        {
+            return sideA * sideB;
+        }
+        public double Perimeter()
+        {
+            return (2 * (sideA + sideB));
+        }
+        public bool IsSquare()
+        {
+            return (sideA == sideB);
+        }
+        public void ReplaceSides()
+        {
+            sideA += sideB;
+            sideB = sideA - sideB;
+            sideA -= sideB;
+        }
+    }
 
-    //TODO: Define constructor with two double parameters: 'a', 'b'. Assign parameters to sides
-    //TODO: Define constructor with double parameter: 'a'. Parameter sets side A of rectangle, and B-side always equals 5
-    //TODO: Define constructor without parameters. A-side of rectangle equals 4, B-side - 3
-
-    //TODO: Define public method 'GetSideA' that returns value of A-side
-    //TODO: Define public method 'GetSideB' that returns value of B-side
-    //TODO: Define public method 'Area' that calculates and returns value of area
-    //TODO: Define public method 'Perimeter' that calculates and returns value of perimeter
-    //TODO: Define public method 'IsSquare' that checks if rectangle is a square. Returns true if it is a square, false if it's not.
-    //TODO: Define public method 'ReplaceSides' that swaps values of rectangle sides
-
-
-
-    //TODO: Create public class ArrayRectangles here
-
-    //TODO: Define private field that is array of rectangles: rectangle_array
-
-    //TODO: Define constructor with int parameter: 'n'. Constructor should create an empty array of rectangles with length of 'n'
-    //TODO: Define constructor that gets enumerable or array of rectangles. Constructor should assign them to its field
-    
-    //TODO: Define public method 'AddRectangle' that adds rectangle on the first empty place of array field. Returns true if array has empty space, if not
-    //TODO: Define public method 'NumberMaxArea' that returns number of rectangle with max value of area. Numbering starts from 0
-    //TODO: Define public method 'NumberMinPerimeter' that returns number of rectangle with min value of perimeter. Numbering starts from 0
-    //TODO: Define public method 'NumberSquare' that returns amount of squares in array of rectangles
-
+    public class ArrayRectangles
+    {
+        private Rectangle[] rectangle_array;
+        public ArrayRectangles(int n)
+        {
+            rectangle_array = new Rectangle[n];
+        }
+        public ArrayRectangles(Rectangle[] array)
+        {
+            rectangle_array = array;
+        }
+        public ArrayRectangles(IEnumerable<Rectangle> array)
+        {
+            rectangle_array = array.ToArray();
+        }
+        public bool AddRectangle(Rectangle rectangle)
+        {
+            for (int i = 0; i < rectangle_array.Length; i++)
+            {
+                if (rectangle_array[i] == null)
+                {
+                    rectangle_array[i] = rectangle;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public double NumberMaxArea()
+        {
+            double maximum = rectangle_array[0].Area();
+            foreach (Rectangle rectangle in rectangle_array)
+                if (rectangle.Area() > maximum) maximum = rectangle.Area();
+            return maximum;
+        }
+        public double NumberMinPerimeter()
+        {
+            double minimum = rectangle_array[0].Perimeter();
+            foreach (Rectangle rectangle in rectangle_array)
+                if (rectangle.Perimeter() < minimum) minimum = rectangle.Perimeter();
+            return minimum;
+        }
+        public int NumberSquare()
+        {
+            int numberSquare = 0;
+            foreach (Rectangle rectangle in rectangle_array)
+                if (rectangle.IsSquare())
+                    numberSquare++;
+            return numberSquare;
+        }
+    }
 }
