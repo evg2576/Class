@@ -78,19 +78,29 @@ namespace Class
             }
             return false;
         }
-        public double NumberMaxArea()
+        public int NumberMaxArea()
         {
             double maximum = rectangle_array[0].Area();
+            int index = -1;
             foreach (Rectangle rectangle in rectangle_array)
-                if (rectangle.Area() > maximum) maximum = rectangle.Area();
-            return maximum;
+                if (rectangle.Area() > maximum)
+                {
+                    maximum = rectangle.Area();
+                    index = Array.IndexOf(rectangle_array, rectangle);
+                }
+            return index;
         }
-        public double NumberMinPerimeter()
+        public int NumberMinPerimeter()
         {
             double minimum = rectangle_array[0].Perimeter();
+            int index = -1;
             foreach (Rectangle rectangle in rectangle_array)
-                if (rectangle.Perimeter() < minimum) minimum = rectangle.Perimeter();
-            return minimum;
+                if (rectangle.Perimeter() < minimum)
+                {
+                    minimum = rectangle.Perimeter();
+                    index = Array.IndexOf(rectangle_array, rectangle);
+                }
+            return index;
         }
         public int NumberSquare()
         {
